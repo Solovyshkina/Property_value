@@ -21,7 +21,7 @@ for number_of_page in range(1, 5):
 
     url = webdriver.Chrome(service=service)
 
-    for i in range(1, 5):
+    for i in range(1, 10):
 
         # для блока с сылкой
         selector = f"#frontend-serp > div > div._93444fe79c--wrapper--W0WqH > div:nth-child({i}) > article > div._93444fe79c--card--ibP42 > a"
@@ -62,22 +62,25 @@ for number_of_page in range(1, 5):
                 price_block = url.find_elements(By.CLASS_NAME, "a10a3f92e9--item--iWTsg")
                 # price_block = url.find_elements(By.CSS_SELECTOR, "#frontend-offer-card > div > div.a10a3f92e9--page--OYngf > div.a10a3f92e9--aside--uq1El > div > div:nth-child(1) > div:nth-child(3) > div > div > div:nth-child(1)")
 
-                price_info = []
+                price_per_meter = ''
+                terms_of_transaction = ''
+                mortgage = ''
+
                 for item in price_block:
 
                     first_block_span, second_block_span = item.find_elements(By.TAG_NAME, 'span')
-                    price_info.append(first_block_span.text)
-                    price_info.append(second_block_span.text)
-
-                price_per_meter = ''
-                mortgage = ''
-
-                for item in range(len(price_info)):
-                    if price_info[item] == 'Цена за метр': price_per_meter = price_info[item + 1]
-                    if price_info[item] == 'Ипотека': mortgage = price_info[item + 1]
+                    if first_block_span.text == 'Цена за метр':
+                        price_per_meter = second_block_span.text
+                    elif first_block_span.text == 'Условия сделки':
+                        terms_of_transaction = second_block_span.text
+                    elif first_block_span.text == 'Ипотека':
+                        mortgage = second_block_span.text
 
                 if len(price_per_meter) == 0:
                     price_per_meter = None
+
+                if len(terms_of_transaction) == 0:
+                    terms_of_transaction = None
 
                 if len(mortgage) == 0:
                     mortgage = None
@@ -87,7 +90,23 @@ for number_of_page in range(1, 5):
                 # print('Exception. Price block')
                 price = None
                 price_per_meter = None
+                terms_of_transaction = None
                 mortgage = None
+
+            floor = ''
+            # этаж
+            try:
+                floor_info_block = url.find_element(By.CLASS_NAME, "a10a3f92e9--container--tqDAE").find_elements(
+                    By.CLASS_NAME, "a10a3f92e9--item--Jp5Qv")
+                for item in floor_info_block:
+                    first_i, second_i = item.find_elements(By.TAG_NAME, "span")
+                    if first_i.text == 'Этаж':
+                        floor = second_i.text
+                if len(floor) == 0:
+                    floor = None
+            except:
+                floor = None
+
 
             # для определения и отлавливания отсутствующих значений None
             # информация о квартире и доме, которой может не быть
@@ -191,7 +210,9 @@ for number_of_page in range(1, 5):
                     'time': time_list,
                     'price': price,
                     'price_per_meter': price_per_meter,
+                    'terms_of_transaction' : terms_of_transaction,
                     'mortgage': mortgage,
+                    'floor': floor,
                     'type_of_housing' : type_of_housing,
                     'living_area' : living_area,
                     'toilet' : toilet,
@@ -209,11 +230,10 @@ for number_of_page in range(1, 5):
         except:
             pass
 
+    url.close()
 
 driver.close()
 driver.quit()
-
-print(data)
 
 
 # формирование файла data.csv и запись туда всех значений
