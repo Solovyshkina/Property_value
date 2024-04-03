@@ -1,15 +1,14 @@
 import os
 import time
 from platform import system
-import numpy as np
-
+import pandas as pd
 import csv
-
+from ChromeDriverDir import CHROME
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 from selenium.webdriver.common.by import By
 
-service = Service(executable_path="C:/Users/1/Downloads/chromedriver-win64/chromedriver.exe")
+service = Service(executable_path=CHROME)
 driver = webdriver.Chrome(service=service)
 
 data = []
@@ -55,12 +54,12 @@ for number_of_page in range(1, 5):
 
             try:
 
-                # price = url.find_element(By.CLASS_NAME, "a10a3f92e9--amount--ON6i1").text
+                #price = url.find_element(By.CLASS_NAME, "a10a3f92e9--amount--ON6i1").text
                 price = url.find_element(By.CSS_SELECTOR, "#frontend-offer-card > div > div.a10a3f92e9--page--OYngf > div.a10a3f92e9--aside--uq1El > div > div:nth-child(1) > div:nth-child(1) > div:nth-child(3) > div > div.a10a3f92e9--amount--ON6i1 > span").text
 
                 # вернет массив с блоками, внутри забрать 2 span и распаковать в text
-                price_block = url.find_elements(By.CLASS_NAME, "a10a3f92e9--item--iWTsg")
-                # price_block = url.find_elements(By.CSS_SELECTOR, "#frontend-offer-card > div > div.a10a3f92e9--page--OYngf > div.a10a3f92e9--aside--uq1El > div > div:nth-child(1) > div:nth-child(3) > div > div > div:nth-child(1)")
+                #price_block = url.find_elements(By.CLASS_NAME, "a10a3f92e9--item--iWTsg")
+                price_block = url.find_elements(By.CSS_SELECTOR, "#frontend-offer-card > div > div.a10a3f92e9--page--OYngf > div.a10a3f92e9--aside--uq1El > div > div:nth-child(1) > div:nth-child(3) > div > div > div:nth-child(1)")
 
                 price_per_meter = ''
                 terms_of_transaction = ''
@@ -201,6 +200,20 @@ for number_of_page in range(1, 5):
                 elevators = None
                 parking = None
 
+            try:
+
+                town = url.find_element(By.CSS_SELECTOR, "#frontend-offer-card > div > div.a10a3f92e9--page--OYngf > div.a10a3f92e9--center--b3Pm0 > section > div > div > div:nth-child(2) > address > div > div > a:nth-child(1)").text
+                street = url.find_element(By.CSS_SELECTOR, "#frontend-offer-card > div > div.a10a3f92e9--page--OYngf > div.a10a3f92e9--center--b3Pm0 > section > div > div > div:nth-child(2) > address > div > div > a:nth-child(4)").text
+                number = url.find_element(By.CSS_SELECTOR, "#frontend-offer-card > div > div.a10a3f92e9--page--OYngf > div.a10a3f92e9--center--b3Pm0 > section > div > div > div:nth-child(2) > address > div > div > a:nth-child(5)").text
+                address = ''
+                address = town + ', '+ street + ', ' + number
+
+                if len(address) == 0:
+                    address = None
+
+            except:
+                address = None
+
             # формирование словаря для каждого объекта
             # data - массив, содержащий словари с данными
 
@@ -222,7 +235,8 @@ for number_of_page in range(1, 5):
                     'type_of_house': type_of_house,
                     'year_at_home':  year_at_home,
                     'elevators': elevators,
-                    'parking' : parking
+                    'parking' : parking,
+                    'address' : address
                     }
 
             data.append(dict_)
@@ -236,8 +250,6 @@ driver.close()
 driver.quit()
 
 
-# формирование файла data.csv и запись туда всех значений
-with open('data.csv', 'w', newline='\n', encoding='utf-8', errors=None) as file:
-    writer = csv.DictWriter(file, fieldnames=data[0])
-    writer.writeheader()
-    writer.writerows(data)
+# формирование dataframe из словаря, его запись в файл data.csv
+Data_Frame = pd.DataFrame(data)
+Data_Frame.to_csv('data.csv', sep=',', encoding='utf-8')
