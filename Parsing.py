@@ -13,7 +13,7 @@ driver = webdriver.Chrome(service=service)
 
 data = []
 
-for number_of_page in range(1, 5):
+for number_of_page in range(5, 6):
 
     page = f'https://spb.cian.ru/cat.php?deal_type=sale&engine_version=2&offer_seller_type%5B0%5D=2&offer_seller_type%5B1%5D=3&offer_type=flat&p={number_of_page}&region=2&room1=1&room2=1&room3=1&room4=1&room5=1&room6=1'
     driver.get(page)
@@ -201,15 +201,22 @@ for number_of_page in range(1, 5):
                 parking = None
 
             try:
+                address_block = url.find_element(By.CSS_SELECTOR, '#frontend-offer-card > div > div.a10a3f92e9--page--OYngf > div.a10a3f92e9--center--b3Pm0 > section > div > div > div:nth-child(2) > address > div')
+                address_arr = address_block.find_elements(By.TAG_NAME, 'a')
 
-                town = url.find_element(By.CSS_SELECTOR, "#frontend-offer-card > div > div.a10a3f92e9--page--OYngf > div.a10a3f92e9--center--b3Pm0 > section > div > div > div:nth-child(2) > address > div > div > a:nth-child(1)").text
-                street = url.find_element(By.CSS_SELECTOR, "#frontend-offer-card > div > div.a10a3f92e9--page--OYngf > div.a10a3f92e9--center--b3Pm0 > section > div > div > div:nth-child(2) > address > div > div > a:nth-child(4)").text
-                number = url.find_element(By.CSS_SELECTOR, "#frontend-offer-card > div > div.a10a3f92e9--page--OYngf > div.a10a3f92e9--center--b3Pm0 > section > div > div > div:nth-child(2) > address > div > div > a:nth-child(5)").text
+                number = address_arr[-1].text
+                street = address_arr[-2].text
+                town = address_arr[0].text
+
                 address = ''
+
                 address = town + ', '+ street + ', ' + number
+
 
                 if len(address) == 0:
                     address = None
+
+                print(address)
 
             except:
                 address = None
