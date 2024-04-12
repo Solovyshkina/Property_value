@@ -1,6 +1,7 @@
 import overpy           # to import the overpy module
 import pandas as pd     # to import pandas library
 from geopy.geocoders import Nominatim
+import numpy as np
 
 
 def get_coordinates(adress):
@@ -66,19 +67,36 @@ def count_data_osm(built_query):
 
 if __name__ == '__main__':  #main function to act accordingly to the user's input.
 
-	adress = str(input('Введите адрес: \n'))  # Получаем интересующий нас адрес
-
-	latitude, longitude = get_coordinates(adress)
 	search_radius = '2000'
 
-	user_data= [search_radius, str(latitude), str(longitude)]#(radius,latitude,longitude)
-	school_query = get_school_query(user_data)
-	hospital_query = get_hospital_query(user_data)
-	eat_query = get_eat_query(user_data)
+	data = pd.read_csv('data.csv')
+	address = data['address']
+	infrastructure = []
 
-	data_from_OSM(hospital_query)
-	data_from_OSM(eat_query)
-	data_from_OSM(school_query)
-	print(count_data_osm(school_query))
-	print(count_data_osm(hospital_query))
-	print(count_data_osm(eat_query))
+
+	for item in address:
+		try:
+			item = item.replace(',', '')
+			latitude, longitude = get_coordinates(item)
+			user_data = [search_radius, str(latitude), str(longitude)]
+
+			info = [count_data_osm(get_hospital_query(user_data)), count_data_osm(get_eat_query(user_data)), count_data_osm(get_school_query(user_data))]
+			infrastructure.append(info)
+		except:
+			infrastructure.append([0, 0, 0])
+
+	data_infrastructure = np.array(infrastructure)
+	data_infrastructure = pd.DataFrame(data=data_infrastructure, columns=['hospital_info', 'eat_info', 'school_info'])
+	new_data = pd.concat([data, data_infrastructure], axis=1)
+
+	'''item = 'Санкт-Петербург, ул. Воскова, 12' #13-15В, 3a
+	item = item.replace(',', '')
+	latitude, longitude = get_coordinates(item)
+	user_data = [search_radius, str(latitude), str(longitude)]
+
+	info = [count_data_osm(get_hospital_query(user_data)), count_data_osm(get_eat_query(user_data)),
+			count_data_osm(get_school_query(user_data))]
+	infrastructure.append(info)'''
+
+	new_data.to_csv('new_data.csv', sep=',', encoding='utf-8')
+
