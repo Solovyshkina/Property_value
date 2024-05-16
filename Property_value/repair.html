@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="estate valuation, calculator online">
+    <meta name="description" content="Осуществляется оценка рыночной стоимости недвижимости с помощью онлайн-калькулятора">
+    <title>Калькулятор</title>
+    <link rel="icon" href="images/icon2.png">
+    <link rel="stylesheet" href="styles/repair.css">
+</head>
+<body>
+    <div class="app">
+        <div class="quiz__questions">
+            <section class="questions">
+                <h1 class="questions__heading">Какой ремонт в квартире?</h1>
+                <ul class="questions__card-list">
+                  <!--question_card_1-->
+                    <li class="questions__card-list-item">
+                        <article class="card card_type_studio" data-type="Без ремонта">
+                            <div class="overlay"></div>
+                            <h3 class="card__title">Без ремонта</h3>
+                            <div class="marker"></div>
+                        </article>
+                  </li>
+                  <!--question_card_2-->
+                    <li class="questions__card-list-item">
+                        <article class="card card_type_one-room" data-type="Дизайнерский">
+                            <div class="overlay"></div>
+                            <h3 class="card__title">Дизайнерский</h3>
+                            <div class="marker"></div>
+                        </article>
+                    </li>
+                  <!--question_card_3-->
+                    <li class="questions__card-list-item">
+                        <article class="card card_type_two-room" data-type="Евроремонт">
+                            <div class="overlay"></div>
+                            <h3 class="card__title">Евроремонт</h3>
+                            <div class="marker"></div>
+                        </article>
+                    </li>
+                  <!--question_card_4-->
+                    <li class="questions__card-list-item">
+                        <article class="card card_type_three-room" data-type="Косметический">
+                            <div class="overlay"></div>
+                            <h3 class="card__title">Косметический</h3>
+                            <div class="marker"></div>
+                        </article>
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+        <footer class="footer">
+            <!--footer_back-->
+            <button class="back-button">← Назад</button>
+            <div class="container">
+                <div class="progress-bar">100%</div>
+            </div>
+            <!--footer_next-->
+            <!-- <button class="next-button">Далее →</button> -->
+        </footer>
+       
+    </div>
+    <script src="scripts/repair.js"></script>
+</body>
+</html>
