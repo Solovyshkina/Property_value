@@ -1,0 +1,165 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+.container {
+    display: grid;
+    grid-template-columns: 60% 40%; /* Пропорции 60/40 */
+    height: 100vh; /* Заполнение всей высоты экрана */
+}
+.image {
+    background-image: url('../images/content_3.jpg'); /* Замените 'your-image-url.jpg' на URL вашего изображения */
+    background-size: cover;
+    background-position: center;
+}
+
+/* Header styles */
+header {
+    width: 90%;
+    font-family: Luminari, fantas;
+    font-weight: 100;
+    color: white;
+    padding:  10px 0px;
+    font-size: 20px;
+    display: flex;
+    justify-content: center;
+}
+
+nav {
+    position: relative;
+}
+
+nav ul {
+    list-style-type: none;
+    display: flex;
+    justify-content: flex-end;
+    position: relative;
+}
+
+nav ul li {
+    margin-left: 20px;
+}
+
+nav ul li a {
+    color: white;
+    text-decoration: none;
+}
+
+/* -------------------------------------------------- */
+
+main {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content:space-between;
+    
+}
+
+.content_text {
+    padding: 20px; /* Пример внутренних отступов */
+    width: 100%;
+    height: 100%;
+    color: rgba(0, 0, 0, 0.807);
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    z-index: 1;
+}
+
+.aligned-text-title {
+    color: rgba(0, 0, 0, 0.807);
+    font-family: Impact, fantasy;
+    font-size: 50px;
+    font-style: normal;
+    font-weight: 500;
+    letter-spacing: 1px;
+}
+
+.aligned-text {
+    font-family: Luminari, fantas;
+    font-weight: 100;
+    font-size: 20px;
+    margin-bottom: 20px;
+    letter-spacing: 4px;
+}
+
+.btn {
+    /* background-color: rgba(120, 163, 242, 0.4);
+    padding: 5px 25px;
+    border-radius: 5px;
+    min-height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    letter-spacing: 5px;
+    font-family: Impact, fantasy;
+    color:rgba(0, 0, 0, 0.807);
+    font-size: 30px;
+    font-style: normal;
+    font-weight: 1;
+    text-decoration: none; */
+
+    color: black;
+    font-family: 'Raleway', Arial, sans-serif;
+    font-size: 22px;
+    font-style: normal;
+    font-weight: 600;
+    text-align: center;
+    line-height: normal;
+    text-transform: uppercase;
+    border: 1px solid currentColor;
+    background-color: transparent;
+    word-spacing: 1rem;
+    position: relative;
+    z-index: 1;
+    /* margin: 40px 0px 0px 1400px; */
+    padding: 11px 32px;
+    border-radius: 8px;
+    text-decoration: none;
+}
+
+.btn:hover {
+    background-color: #8e8a8857;
+    cursor: pointer;
+}
+
+/* .slide-left .content {
+    transition: transform 1.5s ease;  Добавляем анимацию сдвига 
+    transform: translateX(-50%);  Сдвигаем содержимое влево на 100% от его собственной ширины 
+} */
+
+/* .overlaynew {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: white;
+    opacity: 0;  Начальная прозрачность 
+    z-index: 2;  Помещаем поверх содержимого 
+} */
+
+
+footer {
+    font-family: Luminari, fantas;
+    font-weight: 100;
+    font-size: 20px;
+    color: rgba(0, 0, 0, 0.807);
+    padding: 20px;
+    text-align: center;
+}
+
+footer p {
+    position: relative;
+}

@@ -1,0 +1,94 @@
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 0%;
+    /* width: 30%; */
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-image: url('../images/content_3_1.jpg');
+    font-family: Arial, sans-serif;
+}
+
+/* body {
+    margin: 100px;
+} */
+
+.price-info {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-start; /* изменено */
+    flex-direction: column; /* изменено */
+    text-align: left; /* изменено */
+}
+
+.price-range {
+    order: -1; /* изменено */
+}
+
+.price-range span {
+    font-size: 30px;
+    color: #333;
+    font-weight: bold;
+}
+
+.price-range p {
+    font-size: 45px;
+    color: #333;
+    font-weight: bold;
+    display: flex;
+    padding-top: 5px;
+    padding-bottom: 0px;
+    padding-left: 160px;
+}
+
+.container {
+    margin-top: 850px;
+    width: 850px; /* изменено */
+    height: 350px;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    background-color: #fff;
+    text-align: center; /* изменено */
+}
+
+.card-header {
+    padding: 40px;
+    border-bottom: 1px solid #e0e0e0;
+}
+
+.card-header h2 {
+    margin: 0;
+    font-size: 23px;
+    color: #333;
+    text-align: start;
+}
+
+.card-header p {
+    margin: 5px 0 0;
+    font-size: 19px;
+    color: #888;
+    text-align: start;
+}
+
+.card-body {
+    padding: 30px;
+}
+
+/* .price-info {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+} */
+
+/* .price-range, .price-change {
+    display: flex;
+    align-items: center;
+}
+
+.price-range span, .price-change span {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+} */
