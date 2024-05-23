@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="keywords" content="estate valuation, calculator online">
+    <meta name="description" content="Осуществляется оценка рыночной стоимости недвижимости с помощью онлайн-калькулятора">
+    <title>Калькулятор</title>
+    <link rel="icon" href="images/icon2.png">
+    <link rel="stylesheet" href="styles/room.css">
+</head>
+<body>
+    <div class="app">
+        <div class="quiz__questions">
+            <section class="questions">
+                <h1 class="questions__heading">Сколько комнат?</h1>
+                <ul class="questions__card-list">
+                  <!--question_card_1-->
+                    <li class="questions__card-list-item">
+                        <article class="card card_type_studio" data-type="Студия">
+                            <div class="overlay"></div>
+                            <h3 class="card__title">Студия</h3>
+                            <div class="marker"></div>
+                        </article>
+                  </li>
+                  <!--question_card_2-->
+                    <li class="questions__card-list-item">
+                        <article class="card card_type_one-room" data-type="Однокомнатная">
+                            <div class="overlay"></div>
+                            <h3 class="card__title">Одна<br>комната</h3>
+                            <div class="marker"></div>
+                        </article>
+                    </li>
+                  <!--question_card_3-->
+                    <li class="questions__card-list-item">
+                        <article class="card card_type_two-room" data-type="Двухкомнатная">
+                            <div class="overlay"></div>
+                            <h3 class="card__title">Две<br>комнаты</h3>
+                            <div class="marker"></div>
+                        </article>
+                    </li>
+                  <!--question_card_4-->
+                    <li class="questions__card-list-item">
+                        <article class="card card_type_three-room" data-type="Трехкомнатная">
+                            <div class="overlay"></div>
+                            <h3 class="card__title">Три<br>комнаты</h3>
+                            <div class="marker"></div>
+                        </article>
+                    </li>
+                  <!--question_card_5-->
+                    <li class="questions__card-list-item">
+                        <article class="card card_type_four-room" data-type="Четырехкомнатная">
+                            <div class="overlay"></div>
+                            <h3 class="card__title">Четыре<br>комнаты</h3>
+                            <div class="marker"></div>
+                        </article>
+                    </li>
+                  <!--question_card_6-->
+                    <li class="questions__card-list-item">
+                        <article class="card card_type_more-room" data-type="Пятикомнатная и более">
+                            <div class="overlay"></div>
+                            <h3 class="card__title">Пять и более</h3>
+                            <div class="marker"></div>
+                        </article>
+                    </li>
+                </ul>
+            </section>
+
+        </div>
+        <footer class="footer">
+            <!--footer_back-->
+            <button class="back-button">← Назад</button>
+            <div class="container">
+                <div class="progress-bar">36%</div>
+            </div>
+            <!--footer_next-->
+            <button class="next-button">Далее →</button>
+        </footer>
+       
+    </div>
+    <script src="scripts/room.js"></script>
+</body>
+</html>
